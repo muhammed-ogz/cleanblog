@@ -1,13 +1,23 @@
 const express = require('express');
-const ejs = require('ejs');
+const mongoose = require('mongoose');
 const app = express();
 const PORT = 5000;
+const Text = require('./models/Texts');
 
+mongoose.connect('mongodb://localhost/cleanblogdb')
 
 app.set("view engine","ejs");
+
 app.use(express.static('public'));
-app.get('/', (req, res) => {
-  res.render('index');
+app.use(express.urlencoded({extended:true}));
+app.use(express.json());
+
+
+app.get('/', async (req, res) => {
+  const blogs = await Text.find({});
+  res.render('index',{
+    blogs
+  });
 });
 app.get('/about', (req, res) => {
   res.render('about');
@@ -18,6 +28,11 @@ app.get('/add_post', (req, res) => {
 app.get('/post', (req, res) => {
   res.render('post');
 });
+
+app.post('/blogs', async(req,res)=>{
+  await Text.create(req.body);
+  res.redirect('/')
+})
 
 app.listen(PORT, () => {
   console.log(`Server running on : ${PORT} PORT`);
