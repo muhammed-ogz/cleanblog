@@ -22,6 +22,12 @@ app.get('/', async (req, res) => {
 app.get('/about', (req, res) => {
   res.render('about');
 });
+app.get('/post/:id', async (req, res) => {
+    const blog = await Text.findById(req.params.id);
+    res.render('post',{
+      blog
+    })
+});
 app.get('/add_post', (req, res) => {
   res.render('add_post');
 });
