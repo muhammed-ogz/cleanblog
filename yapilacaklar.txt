@@ -1,0 +1,4 @@
+- Projede MVC düzeni oluşturulacak
+- Sayfalama yapılacak 
+- Heroku MongoDB yapısı zaar 
+- Kişisel isteğe göre görüntü düzenleme işlemi
