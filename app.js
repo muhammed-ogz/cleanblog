@@ -20,16 +20,20 @@ app.use(
 );
 app.use(express.json());
 
+//gets
 app.get('/', PageController.getAllPosts);
 app.get('/about', PageController.getAbout);
 app.get('/post/:id', PageController.getPost);
 app.get('/add_post', PageController.getAddPost);
 app.get('/blogs/edit/:id', PageController.getPostInfo);
 
+//posts
 app.post('/blogs', BlogController.sendAddPost);
 
+//puts
 app.put('/blogs/:id', BlogController.updatePost);
 
+//deletes
 app.delete('/blogs/:id',BlogController.deletePost);
 
 app.listen(PORT, () => {
